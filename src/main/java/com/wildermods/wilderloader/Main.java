@@ -31,7 +31,7 @@ public class Main {
 			gameJar = System.getProperty("fabric.gameJarPath");
 		}
 		if(fabricJar == null) {
-			System.setProperty("wilderloader.fabricPath", "./fabric-loader-0.12.12.jar");
+			System.setProperty("wilderloader.fabricPath", "./fabric-loader-0.13.1.jar");
 			fabricJar = System.getProperty("wilderloader.fabricPath");
 		}
 		if(fabricDependencyDir == null) {
