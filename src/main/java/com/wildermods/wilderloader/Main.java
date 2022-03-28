@@ -1,6 +1,7 @@
 package com.wildermods.wilderloader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -10,6 +11,15 @@ import java.net.URLClassLoader;
 public class Main {
 
 	public static void main(String[] args) throws Throwable {
+		
+		try {
+			System.setOut(new LogStream(System.out));
+			System.setErr(new LogStream(System.err));
+			System.out.println("Logging initialized.");
+		} catch (FileNotFoundException e) {
+			throw new AssertionError(e);
+		}
+		
 		for(String arg : args) {
 			if(arg.startsWith("gameJarPath=")) {
 				System.setProperty("fabric.gameJarPath", arg.split("=")[1]);
