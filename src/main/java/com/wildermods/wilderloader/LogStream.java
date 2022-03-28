@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 class LogStream extends PrintStream {
 	private static final Object LOCK = new Object();
-	private static final DateTimeFormatter logPrefix = DateTimeFormatter.ofPattern("HH:mm:ss.SSS ");
+	private static final DateTimeFormatter logPrefix = DateTimeFormatter.ofPattern("'['HH:mm:ss.SSS']' ");
 	private static FileOutputStream file;
 	private final PrintStream out;
 	boolean printPrefix = true;
