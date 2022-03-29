@@ -172,6 +172,7 @@ class LogStream extends PrintStream {
 			file = new File("./logs/" + DateTimeFormatter.ISO_DATE.format(LocalDateTime.now()) + " (" + i + ").log");
 		}
 		try {
+			file.getParentFile().mkdirs();
 			file.createNewFile();
 			LogStream.file = new FileOutputStream(file);
 		} catch (IOException e) {
