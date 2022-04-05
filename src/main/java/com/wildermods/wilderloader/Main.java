@@ -41,15 +41,22 @@ public class Main {
 			gameJar = System.getProperty("fabric.gameJarPath");
 		}
 		if(fabricJar == null) {
-			System.setProperty("wilderloader.fabricPath", "./fabric-loader-0.13.1.jar");
+			for(File file : new File(".").listFiles()) {
+				if(file.getName().startsWith("fabric-loader-")) {
+					System.setProperty("wilderloader.fabricPath", file.getCanonicalPath());
+				}
+			}
 			fabricJar = System.getProperty("wilderloader.fabricPath");
+
 		}
 		if(fabricDependencyDir == null) {
 			System.setProperty("wilderloader.fabricDependencyPath", "./fabric/");
 			fabricDependencyDir = System.getProperty("wilderloader.fabricDependencyPath");
 		}
 		
-		
+		if(fabricJar == null) {
+			throw new LinkageError("Missig Fabric Loader");
+		}
 		
 		URL fabricJarPath = new File(fabricJar).toURI().toURL();
 		File fabricDependencyPath = new File(fabricDependencyDir);
