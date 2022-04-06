@@ -7,7 +7,6 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Iterator;
 
 public class Main {
 
@@ -74,27 +73,9 @@ public class Main {
 		
 		Thread.currentThread().setContextClassLoader(launchClassLoader); //have to set the context classloader, otherwise serviceLoader will not find the game provider
 		
-		Iterator<CrashLogService> crashServices = CrashLogService.obtain();
+		MethodHandle handle = MethodHandles.publicLookup().findStatic(launchClassLoader.loadClass("net.fabricmc.loader.impl.launch.knot.KnotClient"), "main", MethodType.methodType(void.class, String[].class));
+		handle.invokeExact(args);
 		
-		try {
-			MethodHandle handle = MethodHandles.publicLookup().findStatic(launchClassLoader.loadClass("net.fabricmc.loader.impl.launch.knot.KnotClient"), "main", MethodType.methodType(void.class, String[].class));
-			handle.invokeExact(args);
-		}
-		catch(Throwable t) {
-			try {
-				if(crashServices != null) {
-					crashServices.forEachRemaining((s) -> {s.logCrash(t);});
-				}
-				else {
-					System.err.println("NO CRASH LOG SERVICE");
-				}
-			}
-			catch(Throwable t2) {
-				System.err.println("There was an exception inside of the crash log service!");
-				t2.printStackTrace();
-			}
-			throw t;
-		}
 		
 	}
 	
