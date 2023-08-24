@@ -1,4 +1,4 @@
-package com.wildermods.wilderloader;
+package com.thegamecommunity.excite.modding.loader;
 
 import java.io.File;
 import java.io.FileNotFoundException;

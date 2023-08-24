@@ -1,4 +1,4 @@
-package com.wildermods.wilderloader;
+package com.thegamecommunity.excite.modding.loader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,16 +25,16 @@ public class Main {
 				System.setProperty("fabric.gameJarPath", arg.split("=")[1]);
 			}
 			else if (arg.startsWith("fabricLoaderPath=")) {
-				System.setProperty("wilderloader.fabricPath", arg.split("=")[1]);
+				System.setProperty("loader.fabricPath", arg.split("=")[1]);
 			}
 			else if (arg.startsWith("fabricDependencyPath=")) {
-				System.setProperty("wilderloader.fabricDependencyPath", arg.split("=")[1]);
+				System.setProperty("loader.fabricDependencyPath", arg.split("=")[1]);
 			}
 		}
 		
 		String gameJar = System.getProperty("fabric.gameJarPath");
-		String fabricJar = System.getProperty("wilderloader.fabricPath");
-		String fabricDependencyDir = System.getProperty("wilderloader.fabricDependencyPath");
+		String fabricJar = System.getProperty("loader.fabricPath");
+		String fabricDependencyDir = System.getProperty("loader.fabricDependencyPath");
 		
 		if(gameJar == null) {
 			System.setProperty("fabric.gameJarPath", "./wildermyth.jar");
@@ -43,15 +43,15 @@ public class Main {
 		if(fabricJar == null) {
 			for(File file : new File(".").listFiles()) {
 				if(file.getName().startsWith("fabric-loader-")) {
-					System.setProperty("wilderloader.fabricPath", file.getCanonicalPath());
+					System.setProperty("loader.fabricPath", file.getCanonicalPath());
 				}
 			}
-			fabricJar = System.getProperty("wilderloader.fabricPath");
+			fabricJar = System.getProperty("loader.fabricPath");
 
 		}
 		if(fabricDependencyDir == null) {
-			System.setProperty("wilderloader.fabricDependencyPath", "./fabric/");
-			fabricDependencyDir = System.getProperty("wilderloader.fabricDependencyPath");
+			System.setProperty("loader.fabricDependencyPath", "./fabric/");
+			fabricDependencyDir = System.getProperty("loader.fabricDependencyPath");
 		}
 		
 		if(fabricJar == null) {
