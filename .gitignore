@@ -25,6 +25,3 @@ hs_err_pid*.log
 
 #ModLauncher
 logs/*
-
-#WilderForge
-crashes/*
