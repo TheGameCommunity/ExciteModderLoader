@@ -33,7 +33,7 @@ public class Main {
 		String fabricDependencyDir = System.getProperty("loader.fabricDependencyPath");
 		
 		if(fabricJar == null) {
-			for(File file : new File(".").listFiles()) {
+			for(File file : new File("./bin").getAbsoluteFile().listFiles()) {
 				if(file.getName().startsWith("fabric-loader-")) {
 					System.setProperty("loader.fabricPath", file.getCanonicalPath());
 				}
@@ -42,7 +42,7 @@ public class Main {
 
 		}
 		if(fabricDependencyDir == null) {
-			System.setProperty("loader.fabricDependencyPath", "./fabric/");
+			System.setProperty("loader.fabricDependencyPath", "./bin/fabric/");
 			fabricDependencyDir = System.getProperty("loader.fabricDependencyPath");
 		}
 		
