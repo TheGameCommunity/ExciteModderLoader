@@ -21,10 +21,7 @@ public class Main {
 		}
 		
 		for(String arg : args) {
-			if(arg.startsWith("gameJarPath=")) {
-				System.setProperty("fabric.gameJarPath", arg.split("=")[1]);
-			}
-			else if (arg.startsWith("fabricLoaderPath=")) {
+			if (arg.startsWith("fabricLoaderPath=")) {
 				System.setProperty("loader.fabricPath", arg.split("=")[1]);
 			}
 			else if (arg.startsWith("fabricDependencyPath=")) {
@@ -32,14 +29,9 @@ public class Main {
 			}
 		}
 		
-		String gameJar = System.getProperty("fabric.gameJarPath");
 		String fabricJar = System.getProperty("loader.fabricPath");
 		String fabricDependencyDir = System.getProperty("loader.fabricDependencyPath");
 		
-		if(gameJar == null) {
-			System.setProperty("fabric.gameJarPath", "./wildermyth.jar");
-			gameJar = System.getProperty("fabric.gameJarPath");
-		}
 		if(fabricJar == null) {
 			for(File file : new File(".").listFiles()) {
 				if(file.getName().startsWith("fabric-loader-")) {
@@ -58,7 +50,6 @@ public class Main {
 			throw new LinkageError("Missig Fabric Loader");
 		}
 		
-		URL fabricJarPath = new File(fabricJar).toURI().toURL();
 		File fabricDependencyPath = new File(fabricDependencyDir);
 		File[] fabricDependencyFiles = fabricDependencyPath.listFiles();
 		URL[] fabricDependencies = new URL[fabricDependencyFiles.length + 1];
@@ -67,7 +58,6 @@ public class Main {
 			fabricDependencies[i] = fabricDependencyFiles[i].toURI().toURL();
 			System.out.println("found fabric dependency " + fabricDependencies[i]);
 		}
-		fabricDependencies[i] = fabricJarPath;
 		
 		URLClassLoader launchClassLoader = new URLClassLoader(fabricDependencies);
 		
