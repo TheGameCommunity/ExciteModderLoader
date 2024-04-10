@@ -47,7 +47,7 @@ public class Main {
 		}
 		
 		if(fabricJar == null) {
-			throw new LinkageError("Missig Fabric Loader");
+			throw new LinkageError("Missig Fabric Loader. Looking in " + new File("./bin").getAbsoluteFile());
 		}
 		
 		File fabricDependencyPath = new File(fabricDependencyDir);
